@@ -10,22 +10,10 @@
 <link rel="stylesheet" href="../public/styles/site.css">
 
 </head>
+<body>
+    <%- include('./partials/header.ejs')%>
 
-<div class="wrapper">
-    <div class="one">
-        <nav class="menu">
-            <ol>
-              <li class="item"><a href="./index.html">Home</a></li>
-              <li class="item"><a href="#">Boarding</a></li>
-              <li class="item"><a href="./grooming.html">Grooming</a></li>
-              <li class="item"><a href="#">Training</a></li>
-              <li class="item"><a href="#">Registration</a></li>
-              <li class="item"><a href="#">Log In</a></li>
-              <li class="item"><a href="#">Book Now!</a></li>
-              <li class="item"><a href="#">My Profile</a></li>
-            </ol>
-          </nav>
-    </div>
+    
 
 <div class="seven">
     <img src="../public/images/darren-richardson.jpg" alt="A dog in a bucket of suds." width="800"><br>
@@ -70,4 +58,5 @@
         </tr>
     </table>
 </div>
-
+<%- include('./partials/footer.ejs')%>
+</body></html>

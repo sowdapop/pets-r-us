@@ -85,3 +85,9 @@ table {
     border-style: solid;
     size: 10px;
 }
+
+header, footer  { 
+  background-color: grey;
+  color: ghostwhite;
+  padding: 15px;
+}

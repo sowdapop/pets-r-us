@@ -12,21 +12,10 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <div class="one">
-        <nav class="menu">
-            <ol>
-              <li class="item"><a href="./index.html">Home</a></li>
-              <li class="item"><a href="#">Boarding</a></li>
-              <li class="item"><a href="./grooming.html">Grooming</a></li>
-              <li class="item"><a href="#">Training</a></li>
-              <li class="item"><a href="#">Registration</a></li>
-              <li class="item"><a href="#">Log In</a></li>
-              <li class="item"><a href="#">Book Now!</a></li>
-              <li class="item"><a href="#">My Profile</a></li>
-            </ol>
-          </nav>
-    </div>
+<%-include('/partials/header.ejs')%>
+
+
+    
 
     <div class="two">
         <img src="../public/images/the-lucky-neko.jpg" alt="A basket of kittens" width="700"><br>
@@ -81,6 +70,19 @@
     Our retail store hours are 9am-9pm.<br>
     Our grooming and training services are offered 9am-7pm.<br>
     Our boarding services are open 24/7.
+
+    <br><br>
+
+        <h2>Contact Us</h2>
+        <form id="form" class="topBefore">
+
+            <input type="text" placeholder="Name">
+            <input type="text" placeholder="e-mail">
+            <input id="message" type="text" placeholder="message"></input>
+            <input id="submit" type="submit" value="Contact Us!">
+
+        </form>
+
     </div>
 
     <div class="six">
@@ -100,9 +102,12 @@
         Photo by <a href="https://unsplash.com/@viktortalashuk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Viktor Talashuk</a> 
         on <a href="https://unsplash.com/s/photos/poodle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
-    
     </p>
     </div>
   </div>
+
+  
+
+  <%- include('./partials/footer.ejs')%>
 </body>
 </html>
