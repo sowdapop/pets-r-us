@@ -1,3 +1,168 @@
+<!--// Name: Kayla McDanel
+// Date: 07/02/22
+// Assignment: 6.2 Pets-R-Us Part 3
+// Description: Website using Node, Express, EJS, MongoDB, and Mongoose.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets-R-Us</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/site.css">
+
+</head>
+
+<body>
+
 <%- include('./partials/header.ejs')%>
 
+<div class="two">
+<img src="../public/images/hannah-lim.jpg" alt="A line of dogs sitting in from of a pink wall" width="700"><br>
+Photo by <a href="https://unsplash.com/@hannah15198?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Hannah Lim</a> 
+on <a href="https://unsplash.com/s/photos/dogs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+</div>
+
+<div class="one">
+    <h1>Join our pack!</h1>
+<div class="card">
+    <div class="card-content">
+        <div class="form">
+            <form action="/register" method="post">
+                <div class="form-field">
+                    <label for="username">Username</label><br />
+                    <input class="input" type="text" name="username" id="username" required autofocus>
+                </div>
+
+                <div class="form-field">
+                    <label for="password">Password</label><br />
+                    <input class="input" type="password" name="password" id="password" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="email">Email</label><br />
+                    <input class="input" type="email" name="email" id="email">
+                </div>
+
+                <div class="form-field">
+                    <input type="submit" value="Sign up" class="btn btn-primary full-width">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<h3 class="title">Active User List</h3>
+
+    <hr>
+
+<div class="card">
+    <div class="card-content" style="margin: 30px;">
+         <table class="table table-bordered">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+            <tbody>
+                
+            <tr>
+                <td>
+                    human1
+                </td>
+                <td>
+                    human1@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human2
+                </td>
+                <td>
+                    human2@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human3
+                </td>
+                <td>
+                    human3@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human4
+                </td>
+                <td>
+                    human4@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human5
+                </td>
+                <td>
+                    human5@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human6
+                </td>
+                <td>
+                    human1@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human7
+                </td>
+                <td>
+                    human7@bmail.com   
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human8
+                </td>
+                <td>
+                    human8@bmail.com
+                </td>
+            </tr>
+            </tbody>
+                
+            <tr>
+                <td>
+                    human9
+                </td>
+                <td>
+                    human9@bmail.com
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
 <%- include('./partials/footer.ejs')%>
+</body>
+</html>
