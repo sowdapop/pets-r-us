@@ -1,6 +1,6 @@
 <!--// Name: Kayla McDanel
 // Date: 07/02/22
-// Assignment: 6.2 Pets-R-Us Part 3
+// Assignment: 7.2 Pets-R-Us Part 4
 // Description: Website using Node, Express, EJS, MongoDB, and Mongoose.-->
 
 <!DOCTYPE html>
@@ -20,6 +20,28 @@
 
 <%- include('./partials/header.ejs')%>
 
+<h1>Log In Now!</h1>
+<div class="card">
+    <div class="card-content">
+        <div class="form">
+            <form action="/login" method="post">
+                <div class="form-field">
+                    <label for="username">Username</label><br />
+                    <input class="input" type="text" name="username" id="username" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="password">Password</label><br />
+                    <input class="input" type="password" name="password" id="password" required>
+                </div>
+
+                <div class="form-field">
+                    <input type="submit" value="Log In" class="btn btn-primary full-width">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <%- include('./partials/footer.ejs')%>

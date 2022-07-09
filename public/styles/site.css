@@ -86,8 +86,15 @@ table {
     size: 10px;
 }
 
-header, footer  { 
+header  { 
   background-color: grey;
   color: ghostwhite;
   padding: 15px;
+}
+
+#footer {
+  background-color: grey;
+  color: ghostwhite;
+  bottom: 0;
+  width: 100%;
 }

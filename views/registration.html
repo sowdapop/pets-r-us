@@ -26,142 +26,49 @@ Photo by <a href="https://unsplash.com/@hannah15198?utm_source=unsplash&utm_medi
 on <a href="https://unsplash.com/s/photos/dogs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   
 </div>
+<form action="/registration" method="post">
+    <div class="container">
+        <h1>Join Our Pack!</h1>
+        <p>Fill out this form to create an account.</p>
 
-<div class="one">
-    <h1>Join our pack!</h1>
-<div class="card">
+        <label for="psw"><b>Username</b></label>
+        <input type="text" placeholder="Username" name="username" id="username" required>
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Enter Email" name="email" id="email" required>
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="password" id="password" required>
+
+
+        <button type="submit" value="Register" class="registerBtn">Register</button>
+    </div>
+    
     <div class="card-content">
-        <div class="form">
-            <form action="/register" method="post">
-                <div class="form-field">
-                    <label for="username">Username</label><br />
-                    <input class="input" type="text" name="username" id="username" required autofocus>
-                </div>
-
-                <div class="form-field">
-                    <label for="password">Password</label><br />
-                    <input class="input" type="password" name="password" id="password" required>
-                </div>
-
-                <div class="form-field">
-                    <label for="email">Email</label><br />
-                    <input class="input" type="email" name="email" id="email">
-                </div>
-
-                <div class="form-field">
-                    <input type="submit" value="Sign up" class="btn btn-primary full-width">
-                </div>
-            </form>
-        </div>
+        <% if(users.length> 0) { %>
+            <table class="center">
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+                <tbody>
+                    <% users.forEach(function(user) { %>
+                        <tr>
+                            <td>
+                                <%= user.username %>
+                            </td>
+                            <td>
+                                <%= user.email %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <h3>Users have not been added to the MongoDB database. Try adding some!</h3>
+                <% } %>
     </div>
-</div>
+</form>
 
-<h3 class="title">Active User List</h3>
-
-    <hr>
-
-<div class="card">
-    <div class="card-content" style="margin: 30px;">
-         <table class="table table-bordered">
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-            </tr>
-            <tbody>
-                
-            <tr>
-                <td>
-                    human1
-                </td>
-                <td>
-                    human1@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human2
-                </td>
-                <td>
-                    human2@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human3
-                </td>
-                <td>
-                    human3@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human4
-                </td>
-                <td>
-                    human4@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human5
-                </td>
-                <td>
-                    human5@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human6
-                </td>
-                <td>
-                    human1@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human7
-                </td>
-                <td>
-                    human7@bmail.com   
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human8
-                </td>
-                <td>
-                    human8@bmail.com
-                </td>
-            </tr>
-            </tbody>
-                
-            <tr>
-                <td>
-                    human9
-                </td>
-                <td>
-                    human9@bmail.com
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
+<p>Already a member? <a href="../views/login.html">Log In Now!</a></p>
 
 <%- include('./partials/footer.ejs')%>
 </body>
