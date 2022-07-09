@@ -7,17 +7,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const passport = require('passport')
+const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
 const moment = require('moment');
+const csurf = require('csurf');
+const helmet = require('helmet');
 
 //Mongoose model imports
 const User = require('./models/user');
-
+const { register } = require('./models/user');
 
 
 const app = express();
+const csurfProtection = csurf({ cookie: true });
 const PORT = process.env.PORT || 3000;
 
 //Connection to Mongo
@@ -48,8 +51,9 @@ app.set("views", "./views");
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
+app.use(helmet.xssFilter());
 app.use(cookieParser());
+app.use(csurfProtection);
 
 app.use(session({
   secret: 's3cret',
@@ -57,6 +61,7 @@ app.use(session({
   saveUninitialized: true
 }));
 
+//Mongo Connection
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -69,65 +74,57 @@ app.get("", (req, res) => {
 
   let users = User.find({}, function (err, users) {
     if (err) {
-      console.log(err)
+      console.log(err);
       errorMessage = 'MongoDB Exception: ' + err;
     } else {
       errorMessage = null;
     }
-
-    res.render('index', {
-      title: 'Pet-R-Us: Home',
-      
-      pageName: 'Home Page'
-    })
-  })
+  });
 });
 
+//Landing page
+app.get("", (req, res) => {
+  res.render('index');
+});
+
+//Home page
+app.get("/index", (req, res) => {
+  res.render('index');
+});
+
+//Grooming page
 app.get("/grooming", (req, res) => {
-  res.render('grooming', {
-    title: 'Pets-R-Us Grooming',
-    
-    pageName: 'Grooming Page'
-  });
+  res.render('grooming');
 });
 
+//Boarding Page
 app.get("/boarding", (req, res) => {
-  res.render('boarding', {
-    title: 'Pets-R-Us Boarding',
-    
-    pageName: 'Boarding Page'
-  });
+  res.render('boarding');
 });
 
-
+//Training Page
 app.get("/training", (req, res) => {
-  res.render('training', {
-    title: 'Pets-R-Us Training',
-    
-    pageName: 'Training Page'
-  });
+  res.render('training');
 });
 
+//Registration page
 app.get("/registration", (req, res) => {
   User.find({}, function(err, users) {
     if (err) {
       console.log(err);
     } else {
       res.render('registration', {
-        title: 'Pets-R-Us Registration',
-        
-        cardTitle: 'Registration Form',
-        moment: moment,
         users: users
     })}
-  })
+  });
  });
 
- app.post('/register', (req, res, next) => {
+ app.post('/registration', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
 
-  User.register(new User({username: username}), password, function (err, user) {
+  User.register(new User({username: username, email: email}), password, function (err, user) {
     if (err) {
       console.log(err);
       return res.redirect('/registration');
@@ -136,7 +133,7 @@ app.get("/registration", (req, res) => {
       req, res, function () {
         res.redirect('/registration')
       });
-  })
+  });
  })
 
 app.post('users', (req, res) => {
@@ -147,14 +144,47 @@ app.post('users', (req, res) => {
     name: userName
   })
 
-  User.create(user, function (err, fruit) {
+  User.create(user, function (err, user) {
     if (err) {
       console.log(err);
     } else {
       res.redirect('/');
-    }
-  })
+    };
+  });
 })
+
+//Login Page
+app.use((req, res, next) => {
+  const token = req.csrfToken();
+  res.cookie('XSRF-TOKEN', token);
+  res.locals.csrfToken = token;
+  next();
+});
+
+app.post('/users', (req, res) => {
+  console.log(`\n  CSRF protected value: ${req.body.password}`);
+  res.redirect('/login');
+})
+
+app.get('/login', (req, res) => {
+  res.render('login')
+  });
+
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "/index",
+  failureRedirect: "/login"
+}), function (req, res) {
+});
+
+//Logout Page
+app.get("/logout", (req, res) => {
+  res.render('logout');
+});
+
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/index');
+});
 
 //Listen on Port 3000
 
