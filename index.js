@@ -1,6 +1,6 @@
 // Name: Kayla McDanel
-// Date: 07/02/22
-// Assignment: 6.2 Pets-R-Us Part 3
+// Date: 07/15/22
+// Assignment: 8.2 Pets-R-Us Part 5
 // Description: Website using Node, Express, EJS, MongoDB, and Mongoose.
 
 const express = require('express');
@@ -13,9 +13,11 @@ const session = require('express-session');
 const moment = require('moment');
 const csurf = require('csurf');
 const helmet = require('helmet');
+const methodOverride = require = ('method-override');
 
 //Mongoose model imports
 const User = require('./models/user');
+const Book = require("./models/book");
 const { register } = require('./models/user');
 
 
@@ -54,6 +56,7 @@ app.use(express.json());
 app.use(helmet.xssFilter());
 app.use(cookieParser());
 app.use(csurfProtection);
+app.use(methodOverride('_method'));
 
 app.use(session({
   secret: 's3cret',
@@ -65,11 +68,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+//Passport
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("", (req, res) => {
+app.get('/', (req, res) => {
   let errorMessage = '';
 
   let users = User.find({}, function (err, users) {
@@ -154,6 +158,11 @@ app.post('users', (req, res) => {
 })
 
 //Login Page
+app.get('/login', (req, res) => {
+  res.render('login', {csrfToken: req.csrfToken})
+  });
+
+
 app.use((req, res, next) => {
   const token = req.csrfToken();
   res.cookie('XSRF-TOKEN', token);
@@ -162,30 +171,35 @@ app.use((req, res, next) => {
 });
 
 app.post('/users', (req, res) => {
-  console.log(`\n  CSRF protected value: ${req.body.password}`);
+  console.log(`\n  CSRF protected value: ${req.body.userName}`);
   res.redirect('/login');
-})
+});
 
-app.get('/login', (req, res) => {
-  res.render('login')
-  });
+
 
 app.post("/login", passport.authenticate("local", {
-  successRedirect: "/index",
+  successRedirect: "/",
   failureRedirect: "/login"
 }), function (req, res) {
 });
 
 //Logout Page
-app.get("/logout", (req, res) => {
+app.get("/logout", (req, res,) => {
   res.render('logout');
 });
 
-app.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/index');
+app.delete('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/login');
 });
 
+//Appointment Page
+app.get("/appointment", (req, res) => {
+  res.render('appointment');
+});
+
+let servicesJsonFile = fs.readFileSync('./public/data/services.json');
+let services = JSON.parse(servicesJsonFile);
 //Listen on Port 3000
 
 app.listen(PORT, () => {

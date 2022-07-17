@@ -1,0 +1,65 @@
+<!--// Name: Kayla McDanel
+// Date: 07/02/22
+// Assignment: 7.2 Pets-R-Us Part 4
+// Description: Website using Node, Express, EJS, MongoDB, and Mongoose.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets-R-Us</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/site.css">
+
+</head>
+
+<body>
+
+<%- include('./partials/header.ejs')%>
+
+<h1>Book your appointment now!</h1>
+<div class="card">
+    <div class="card-content">
+        <div class="form">
+            <form action="/book" method="post">
+                <div class="form-field">
+                    
+                    <label for="fname">First Name</label><br />
+                    <input class="input" type="text" name="fName" id="fName" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="lName">Last Name</label><br />
+                    <input class="input" type="text" name="lname" id="lname" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="email">Email</label><br />
+                    <input class="input" type="email" name="email" id="email" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="services">Services</label><br />
+                    <select name="services" id="services" class="drop-down-menu full-width">
+                        <% services.forEach((services) => { %>
+                            <option value= <%= services.name %>> </option>
+                            <% }) %>
+                        </select>
+                </div>
+
+                <div class="form-field">
+                    <input type="submit" value="Book Now!" class="btn btn-primary full-width">
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%- include('./partials/footer.ejs')%>
+</body>
+</html>
