@@ -198,6 +198,11 @@ app.get("/appointment", (req, res) => {
   res.render('appointment');
 });
 
+function isLoggedIn(req, res, next) {
+  req.isAuthenticated();
+  next(true);
+};
+
 let servicesJsonFile = fs.readFileSync('./public/data/services.json');
 let services = JSON.parse(servicesJsonFile);
 //Listen on Port 3000
