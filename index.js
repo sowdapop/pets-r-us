@@ -13,7 +13,7 @@ const session = require('express-session');
 const moment = require('moment');
 const csurf = require('csurf');
 const helmet = require('helmet');
-const methodOverride = require = ('method-override');
+const fs = require('fs');
 
 //Mongoose model imports
 const User = require('./models/user');
@@ -56,7 +56,7 @@ app.use(express.json());
 app.use(helmet.xssFilter());
 app.use(cookieParser());
 app.use(csurfProtection);
-app.use(methodOverride('_method'));
+
 
 app.use(session({
   secret: 's3cret',
