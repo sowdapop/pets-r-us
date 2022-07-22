@@ -17,7 +17,7 @@ const fs = require('fs');
 
 //Mongoose model imports
 const User = require('./models/user');
-const Book = require("./models/book");
+const Book = require("./models/appointment");
 const { register } = require('./models/user');
 
 
@@ -205,6 +205,33 @@ function isLoggedIn(req, res, next) {
 
 let servicesJsonFile = fs.readFileSync('./public/data/services.json');
 let services = JSON.parse(servicesJsonFile);
+
+
+//Profile Page
+app.get("/profile", (req, res) => {
+  res.render('profile');
+});
+
+app.get('/data/profile', async(req, res) => {
+  let profileJsonFile = fs.readFileSync('./public/data/profile.json');
+  let profile = JSON.parse(profileJsonFile);
+
+  res.json(profile);
+})
+
+app.post('/profile', (req, res) => {
+  const newProfile = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      birthDate: req.body.birthDate,
+      favColor: req.body.favColor
+  };
+
+  console.log(newProfile);
+
+  res.redirect('/');
+})
+
 //Listen on Port 3000
 
 app.listen(PORT, () => {

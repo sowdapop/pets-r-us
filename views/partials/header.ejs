@@ -13,14 +13,5 @@
               <li class="item"><a href="profile">My Profile</a></li>
             </ol>
 
-            <div style="text-align: right; float: right">
-              <% if(currentUser) { %>
-                  <a href="#">Hello, <%= currentUser %></a> <a href="/logout">Logout</a>
-              <% } %>
-      
-              <% if(!currentUser) { %>
-                  <a href="/registration">Register!</a> <a href="/login">Login</a>
-              <% } %>
-          </div>
           </nav>
     </div>

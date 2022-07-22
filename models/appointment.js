@@ -19,4 +19,4 @@ let userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model("Book", userSchema);
+module.exports = mongoose.model("Appointment", userSchema);
