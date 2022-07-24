@@ -24,7 +24,7 @@
 <div class="card">
     <div class="card-content">
         <div class="form">
-            <form action="/book" method="post">
+            <form action="/appointment" method="post">
                 <div class="form-field">
                     
                     <label for="fname">First Name</label><br />
@@ -45,7 +45,7 @@
                     <label for="services">Services</label><br />
                     <select name="services" id="services" class="drop-down-menu full-width">
                         <% services.forEach((services) => { %>
-                            <option value= <%= services.name %>> </option>
+                            <option value="<%= services.id %>"><%= services.name %></option>
                             <% }) %>
                         </select>
                 </div>

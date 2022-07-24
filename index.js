@@ -17,8 +17,8 @@ const fs = require('fs');
 
 //Mongoose model imports
 const User = require('./models/user');
-const Book = require("./models/appointment");
-const { register } = require('./models/user');
+const Appointment = require("./models/appointment");
+const { db } = require('./models/user');
 
 
 const app = express();
@@ -118,7 +118,8 @@ app.get("/registration", (req, res) => {
       console.log(err);
     } else {
       res.render('registration', {
-        users: users
+        moment: 'moment',
+        users: 'users'
     })}
   });
  });
@@ -175,7 +176,9 @@ app.post('/users', (req, res) => {
   res.redirect('/login');
 });
 
-
+app.get('/', (req, res) => {
+  res.render('index')
+})
 
 app.post("/login", passport.authenticate("local", {
   successRedirect: "/",
@@ -195,16 +198,25 @@ app.delete('/logout', (req, res) => {
 
 //Appointment Page
 app.get("/appointment", (req, res) => {
+  let servicesJsonFile = fs.readFileSync('./public/data/services.json');
+  let services = JSON.parse(servicesJsonFile);
   res.render('appointment');
 });
 
 function isLoggedIn(req, res, next) {
-  req.isAuthenticated();
-  next(true);
-};
+  if (req.isAuthenticated()){
+  return next();
+} else {
+  res.redirect("index");
+}
+}
 
-let servicesJsonFile = fs.readFileSync('./public/data/services.json');
-let services = JSON.parse(servicesJsonFile);
+
+app.get('/data/services', async(req, res) => {
+  let servicesJsonFile = fs.readFileSync('./public/data/services.json');
+  let services = JSON.parse(servicesJsonFile);
+  res.json(services);
+})
 
 
 //Profile Page
@@ -212,19 +224,19 @@ app.get("/profile", (req, res) => {
   res.render('profile');
 });
 
-app.get('/data/profile', async(req, res) => {
-  let profileJsonFile = fs.readFileSync('./public/data/profile.json');
-  let profile = JSON.parse(profileJsonFile);
-
-  res.json(profile);
-})
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()){
+  return next();
+} else {
+  res.redirect("index");
+}
+}
 
 app.post('/profile', (req, res) => {
   const newProfile = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      birthDate: req.body.birthDate,
-      favColor: req.body.favColor
+      appointment: req.body.appointment,
   };
 
   console.log(newProfile);

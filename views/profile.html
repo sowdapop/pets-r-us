@@ -28,23 +28,23 @@
             <li class="p-10"><b>Email:</b> </li>
         </ul>
     
-        <div id="appointments"></div>
+        <div id="profile"></div>
     </div>
 </div>
 
 <script>
-    fetch('/appointment')
+    fetch('/profile')
         .then(res => res.json())
         .then(data => {
-            let tableString = `<br /><h4 style="font-size: 32px; text-align: center; padding-bottom: 10px;">My Appointments</h4><table id="appointments" class="table"><tr><th>First name</th><th>Last name</th><th>Email</th><th>Service</th></tr>`;
+            let tableString = `<br /><h4 style="font-size: 32px; text-align: center; padding-bottom: 10px;">My Appointments</h4><table id="appointments" class="table"><tr><th>First name</th><th>Last name</th><th>Service</th></tr>`;
 
-            for (let appointment of data) {
-                tableString += `<tr><td>${appointment.firstName}</td><td>${appointment.lastName}</td><td>${appointment.email}</td><td>${appointment.service}</td></tr>`;
+            for (let profile of data) {
+                tableString += `<tr><td>${profile.firstName}</td><td>${profile.lastName}</td><td>${appointment.services}</td></tr>`;
             }
 
             tableString += `</table>`;
 
-            document.getElementById('appointment').innerHTML = tableString;
+            document.getElementById('profile').innerHTML = tableString;
         });
 </script>
 
