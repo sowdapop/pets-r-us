@@ -44,7 +44,7 @@
                 <div class="form-field">
                     <label for="services">Services</label><br />
                     <select name="services" id="services" class="drop-down-menu full-width">
-                        <% services.forEach((services) => { %>
+                        <% services.forEach((grooming, boarding, training) => { %>
                             <option value="<%= services.id %>"><%= services.name %></option>
                             <% }) %>
                         </select>

@@ -33,7 +33,7 @@
 </div>
 
 <script>
-    fetch('/profile')
+    fetch('/appointment')
         .then(res => res.json())
         .then(data => {
             let tableString = `<br /><h4 style="font-size: 32px; text-align: center; padding-bottom: 10px;">My Appointments</h4><table id="appointments" class="table"><tr><th>First name</th><th>Last name</th><th>Service</th></tr>`;

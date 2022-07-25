@@ -160,7 +160,7 @@ app.post('users', (req, res) => {
 
 //Login Page
 app.get('/login', (req, res) => {
-  res.render('login', {csrfToken: req.csrfToken})
+  res.render('login', {csrfToken: req.csrfToken()})
   });
 
 

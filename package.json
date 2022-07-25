@@ -33,6 +33,10 @@
   },
   "homepage": "https://github.com/sowdapop/pets-r-us#readme",
   "devDependencies": {
-    "nodemon": "^2.0.18"
-  }
+    "nodemon": "2.0.18"
+  },
+    "engines": {
+      "node": "16.15.1",
+      "npm": "8.5.5"
+    }
 }
